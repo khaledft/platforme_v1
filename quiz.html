@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Création de Quiz</title>
+    <title> Gestion de Club</title>
+	<style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: Century Gothic;
+        }
+        body{
+            background-image:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(i9.jpg);
+            background-position: center;
+            background-size:cover ;
+        }
+        header{
+            background-image:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5));
+            height: 10vh;
+            background-size: cover;
+            background-position: center;
+            min-height: 100px;
+        }
+        
+        ul{
+            float:right;
+            list-style-type: none;
+            margin-top: 30px;
+            margin-right:60px ;
+        }
+        ul li{
+            display: inline-block;
+        }
+        ul li a{
+            text-decoration: none;
+            color: #fff;
+            padding: 5px 20px;
+            border: 1px solid transparent;
+            transition: 0.5s ease;
+        
+        }
+        
+        ul li a:hover{
+            background-color: #fff;
+            color: #000;
+        }
+        
+        ul li.active a{
+        background-color:#fff;
+            color: #000;
+        
+        }
+        
+        .logo img{
+            float: left;
+            width: 50px;
+            height: auto;
+          border-radius: 50px;
+        }
+        
+        .main{
+            max-width: 1200px;
+            margin: auto;
+        }
+        
+        .title{
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+        
+        .title h1{
+            color: #fff;
+            font-size: 65px;
+        }
+        
+        
+        
+        
+        
+        
+        
+        .container {
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            max-width: 800px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        
+        input {
+            width: 70%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+           margin-left:70px ;
+        }
+        
+        button {
+           background-color: #bab7bb44;
+            width: 50%;
+            padding: 1rem 2rem;
+            font-weight: 700;
+            color: blueviolet;
+            cursor: pointer;
+            border-radius: 0.5rem;
+            border-bottom: 2px solid blueviolet;
+            border-right: 2px solid blueviolet;
+            border-top: 2px solid white;
+            border-left: 2px solid white;
+            transition-duration: 1s;
+            transition-property: border-top, border-left, border-bottom, border-right,
+              box-shadow;
+          }
+          
+          button:hover {
+            border-top: 2px solid blueviolet;
+            border-left: 2px solid blueviolet;
+            border-bottom: 2px solid rgb(238, 103, 238);
+            border-right: 2px solid rgb(238, 103, 238);
+            box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px,
+              rgba(240, 46, 170, 0.2) 15px 15px;
+          }
+          
+        
+        .question-preview h3 {
+            margin: 10px 0;
+        }
+        
+        
+        
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        
+        .result {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        
+        
+        
+        .container {
+            margin: 20px auto;
+            padding: 20px;
+            width: 90%;
+            max-width: 800px;
+            background-color: rgba(254, 253, 253, 0.779);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+        
+        .form-section {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        
+        
+        
+        .question-preview {
+            margin-top: 20px;
+        }
+        
+        .question-preview h3 {
+            color: #333;
+            margin: 10px 0;
+        }
+        
+        .question-preview ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .question-preview li {
+            background: #eee;
+            padding: 5px;
+            margin-bottom: 5px;
+            border-radius: 3px;
+        }
+        
+        
+        
+        
+        
+        
+        #i22 {
+            background-color: #f0f8ff; /* Couleur de fond */
+            border: 2px solid #4CAF50; /* Bordure verte */
+            border-radius: 8px; /* Coins arrondis */
+            padding: 10px; /* Espace intérieur */
+            margin: 10px 0; /* Espace entre les questions */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre légère */
+        }
+        #i22 h3 {
+            color: #333; /* Couleur du titre */
+            font-size: 1.2rem; /* Taille du titre */
+            margin-bottom: 8px; /* Espacement du titre */
+        }
+        #i22 ul {
+            list-style: none;
+            padding: 0;
+            margin-right: 500px;
+        }
+        
+        /* Style de chaque élément de liste (option) */
+        #i22 ul li {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            background-color: #fff;
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            transition: background-color 0.3s, border-color 0.3s;
+            cursor: pointer;
+        }
+        
+        #i22 ul li:hover {
+            background-color: #e8f5e9;
+            border-color: #4CAF50; /* couleur de bordure au survol */
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+          /*footer
+          */
+        
+          footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            height: 50px;
+           margin-top: 150px;
+        }
+        
+    </style> 
+        
+</head>
+<body>
+   
+    <header>
+        <div class="main">
+            <div class="logo">
+                <img src="i2.png">
+            </div>
+            
+             <ul>
+             <li class="active"><a href="index.html"><i class="fa fa-home"></i>Acceuil</a></li>
+             <li><a href="#">a propos </a></li>
+             <li><a href="#">Cantacter</a></li>
+             </ul>  </div>
+                
+    </header>
+
+    <!-- Section principale -->
+    <div class="container">
+        <!-- Formulaire pour ajouter des questions -->
+        <label for="question">Question :</label>
+        <input type="text" id="question" placeholder="Entrez votre question ici">
+
+        <label for="option1">Option 1 :</label>
+        <input type="text" id="option1" placeholder="Option 1">
+
+        <label for="option2">Option 2 :</label>
+        <input type="text" id="option2" placeholder="Option 2">
+
+        <label for="option3">Option 3 :</label>
+        <input type="text" id="option3" placeholder="Option 3">
+
+        <label for="correctOption">Numéro de l'option correcte (1, 2 ou 3) :</label>
+        <input type="number" id="correctOption" min="1" max="3" placeholder="Ex: 2">
+
+        <button onclick="addQuestion()">Ajouter la question</button>
+
+        <!-- Affichage des questions -->
+        <div class="question-preview">
+            <h3>Questions ajoutées :</h3>
+            <div id="quizPreview"></div>
+            <button onclick="submitQuiz()">Submit</button>
+            <div id="results" class="result"></div>
+        </div>
+    </div>
+
+    <footer>
+      
+        <p>&copy; 2024 </p>
+      </footer>
+
+    <script>
+        let questions = [];
+
+        function addQuestion() {
+            const questionText = document.getElementById("question").value.trim();
+            const option1 = document.getElementById("option1").value.trim();
+            const option2 = document.getElementById("option2").value.trim();
+            const option3 = document.getElementById("option3").value.trim();
+            const correctOption = parseInt(document.getElementById("correctOption").value.trim());
+
+            if (!questionText || !option1 || !option2 || !option3 || isNaN(correctOption) || correctOption < 1 || correctOption > 3) {
+                alert("Veuillez remplir tous les champs et entrer une option correcte valide !");
+                return;
+            }
+
+            const newQuestion = {
+                question: questionText,
+                options: [option1, option2, option3],
+                correct: correctOption - 1 // Stocker l'index de l'option correcte (0, 1 ou 2)
+            };
+
+            questions.push(newQuestion);
+            clearForm();
+            displayQuestions();
+        }
+
+        function clearForm() {
+            document.getElementById("question").value = "";
+            document.getElementById("option1").value = "";
+            document.getElementById("option2").value = "";
+            document.getElementById("option3").value = "";
+            document.getElementById("correctOption").value = "";
+        }
+
+        function displayQuestions() {
+            const quizPreview = document.getElementById("quizPreview");
+            quizPreview.innerHTML = "";
+
+            questions.forEach((q, index) => {
+                let optionsHTML = q.options.map((option, i) => `
+                    <li>
+                        <input type="radio" name="question${index}" value="${i}">
+                        <label>${option}</label>
+                    </li>
+                `).join("");
+
+                quizPreview.innerHTML += `
+                    <div id="i22">
+                        <h3>${q.question}</h3>
+                        <ul >${optionsHTML}</ul>
+                    </div>
+                `;
+            });
+        }
+
+        function submitQuiz() {
+            let resultsHTML = "";
+            questions.forEach((q, index) => {
+                const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
+
+                if (selectedOption) {
+                    const answer = parseInt(selectedOption.value);
+                    if (answer === q.correct) {
+                        resultsHTML += `<p>Question ${index + 1}: Correct ✅</p>`;
+                    } else {
+                        resultsHTML += `<p>Question ${index + 1}: Incorrect ❌ (Réponse correcte: ${q.options[q.correct]})</p>`;
+                    }
+                } else {
+                    resultsHTML += `<p>Question ${index + 1}: Non répondue ❌</p>`;
+                }
+            });
+
+            document.getElementById("results").innerHTML = resultsHTML;
+        }
+    </script>
+  
+</body>
+
+</html>

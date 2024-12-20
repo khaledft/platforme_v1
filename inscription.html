@@ -224,12 +224,21 @@
                 color: #0099ff;
                 font-size: 9px;
               }
-              .logo img{
+              .logo img {
                 float: left;
-                width: 60px;
+                width: 50px;
                 height: auto;
-                border-radius: 50%;
-              }
+                border-radius: 50px;
+            }
+    
+            footer {
+              background-color: #333;
+              color: #fff;
+              text-align: center;
+              height: 30px;
+            margin-top: 20px;
+              padding: 20px 0;
+          }
         </style>
     <title> Inscrire</title>
     <meta name="viewport" content="width=device-width, initial-scale=2.0">
@@ -254,7 +263,7 @@
 <div class="container">
     <div class="heading">Inscrire </div>
 
-    <form action="inscri.php" class="form" method="post" id="form">
+    <form action="inscri.php" class="form" method="POST" id="form">
         <input required="" class="input" type="text" name="nom" id="nom" placeholder="Nom">
         <input required="" class="input" type="text" name="prenom" id="prenom" placeholder="Prenom">
         <input class="input" type="date" id="dn" name="dn"  placeholder="date de naissance">
@@ -267,7 +276,7 @@
             
           
 
-              <button  class="login-button" type="submit" value="" >Inscrire</button>
+              <button  class="login-button" type="submit" value="Inscrire" ></button>
     </form>
     <div class="social-account-container">
         <span class="title">Ou inscrire avec</span>
@@ -302,44 +311,50 @@
 
 
 <script >
-
+ 
     document.getElementById("form").addEventListener("submit", function (event) {
         event.preventDefault(); 
         const password = document.getElementById("password").value;
         const confirmPassword = document.getElementById("passwordcomf").value;
         const message = document.getElementById("message");
       
-        
+        // Reset previous messages and styles
         message.textContent = "";
         message.className = "";
       
+        // Password length check
         if (password.length < 4) {
-          message.textContent = "Le mot de passe doit contenir au moins 4 caractères.";
-          message.className = "error";
-          return;
+            message.textContent = "Le mot de passe doit contenir au moins 4 caractères.";
+            message.className = "error";
+            return;
         }
       
+        // Password contains at least one uppercase letter
         if (!/[A-Z]/.test(password)) {
-          message.textContent = "Le mot de passe doit contenir au moins une lettre majuscule.";
-          message.className = "error";
-          return;
+            message.textContent = "Le mot de passe doit contenir au moins une lettre majuscule.";
+            message.className = "error";
+            return;
         }
       
+        // Password contains at least one number
         if (!/[0-9]/.test(password)) {
-          message.textContent = "Le mot de passe doit contenir au moins un chiffre.";
-          message.className = "error";
-          return;
-          
+            message.textContent = "Le mot de passe doit contenir au moins un chiffre.";
+            message.className = "error";
+            return;
         }
       
+        // Check if the passwords match
         if (password !== confirmPassword) {
-          message.textContent = "Les mots de passe ne correspondent pas.";
-          message.className = "error";
-          return;
+            message.textContent = "Les mots de passe ne correspondent pas.";
+            message.className = "error";
+            return;
         }
-      
-      });
-      
+    
+        // If all checks pass, submit the form
+        event.target.submit();
+    });
+    </script>
+    
 </script>
 
 

@@ -1,0 +1,252 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Création de Quiz</title>
+    
+	<style>
+    footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 20px 0;
+      height: 10%;
+  }
+
+    *{  
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+  }
+  header{
+      background-size: cover;
+      background-position: center;
+      height: 10px;
+     
+  }
+  body{
+    background-image:linear-gradient(rgba(51, 51, 51, 0.5),rgba(47, 45, 45, 0.5)), url(i8.jpg);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      overflow: hidden;
+      overflow-y: scroll;
+      
+  }
+  .wrapper{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 110vh;
+      background: rgba(39, 39, 39, 0.4);
+  }
+
+  .nav{
+      
+      position: fixed;
+      top: 0;
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+      height: 100px;
+      line-height: 100px;
+      
+      background: linear-gradient(rgba(39,39,39, 0.6), transparent);
+      z-index: 100;
+  }
+  .nav-logo p{
+      color: white;
+      font-size: 25px;
+      font-weight: 600;
+  }
+  .nav-menu ul{
+      display: flex;
+      margin-left: 70%;
+  }
+  .nav-menu ul li{
+      list-style-type: none;
+      font-size: 25px;
+      
+  }
+  .nav-menu ul li .link{
+      text-decoration: none;
+      font-weight: 500;
+      color: #fff;
+      padding-bottom: 15px;
+      margin: 0 25px;
+  }
+  .link:hover, .active{
+      border-bottom: 2px solid #fff;
+  }
+  .nav-button .btn{
+      width: 130px;
+      height: 40px;
+      font-weight: 500;
+      background: rgba(255, 255, 255, 0.4);
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: .3s ease;
+  }
+      
+        
+        .heading {
+          text-align: center;
+          font-weight: 900;
+          font-size: 30px;
+          color: rgb(16, 137, 211);
+          
+        }
+        .logo img{
+          float: left;
+          width: 60px;
+          height: auto;
+          border-radius: 50%;
+        }
+        
+
+
+
+
+
+        /* From Uiverse.io by abhusha08 */ 
+.card {
+  display: flex;
+  flex-direction: column;
+ background-color: #3333337f;
+ border-radius: 60px;
+  margin-left: 100px;
+  margin-top: 400px;
+  width: 40%;
+}
+
+.blue-btn {
+  width: 300px;
+  height: 150px;
+  margin: 15px;
+  background: rgb(0, 8, 144);
+  background: linear-gradient(
+    90deg,
+    rgba(0, 8, 144, 1) 0%,
+    rgba(16, 0, 255, 1) 22%,
+    rgba(86, 255, 247, 1) 100%
+  );
+  color: white;
+  border: none;
+  border-radius: 0.625em;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  margin-left: 200px;
+}
+.violet-btn {
+  width: 300px;
+  height: 150px;
+  margin: 15px;
+  background: rgb(89, 0, 144);
+  background: linear-gradient(
+    90deg,
+    rgb(94, 0, 144) 0%,
+    rgb(174, 0, 255) 22%,
+    rgb(235, 86, 255) 100%
+  );
+  color: white;
+  border: none;
+  border-radius: 0.625em;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+
+.pink-btn {
+  width: 300px;
+  height: 150px;
+  margin: 15px;
+  background: rgb(0, 89, 9);
+  background: linear-gradient(
+    90deg,
+    rgb(39, 116, 1) 0%,
+    rgb(64, 164, 40) 22%,
+    rgb(43, 219, 102) 100%
+  );
+  color: white;
+  border: none;
+  border-radius: 0.625em;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+
+
+button:hover {
+  color: rgb(0, 0, 0);
+}
+
+button:after {
+  content: "";
+  background: white;
+  position: absolute;
+  z-index: -1;
+  left: -20%;
+  right: -20%;
+  top: 0;
+  bottom: 0;
+  transform: skewX(-45deg) scale(0, 1);
+  transition: all 0.5s;
+}
+
+button:hover:after {
+  transform: skewX(-45deg) scale(1, 1);
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+    </style>
+        
+</head>
+<body>
+  <header>
+    <div class="main">
+    <div class="logo">
+        <img src="i2.png">
+    </div>
+    
+    <div class="nav-menu" id="navMenu">
+        <ul>
+            <li><a href="index.html" class="link active">Acceuil</a></li>
+            <li><a href="#" class="link">a propos</a></li>
+            <li><a href="#" class="link">contact</a></li>
+        </ul>
+    </div>
+    
+</header>
+
+
+<div class="card">
+  <button class="pink-btn">Quiz<a href="quiz.html">  Clickez ici</a></button>
+
+  <button class="blue-btn">FlipFlap<a href="flipflap.html">  Clickez ici</a></button>
+
+  <button class="violet-btn" style="margin-left: 400px;">Notes  <a href="notes.html">   Clickez ici</a></button>
+
+</div>
+
+<footer>
+  <p>&copy; 2024 </p>
+</footer>
+  </body></html>

@@ -212,11 +212,22 @@
                 color: #0099ff;
                 font-size: 9px;
               }
-              .logo img{
+              .logo img {
                 float: left;
-                width: 150px;
+                width: 50px;
                 height: auto;
-              }
+                border-radius: 50px;
+            }
+    
+              footer {
+                background-color: #333;
+                color: #fff;
+                text-align: center;
+                height: 40px;
+              margin-top: 220px;
+                padding: 20px 0;
+            }
+            
         </style>
     <title> Connexion</title>
     </head>
@@ -240,7 +251,7 @@
 <div class="container">
     <div class="heading">Connecter</div>
     
-    <form action="connxion.php" class="form" method="post">
+    <form action="connexion.php" class="form" method="post">
       <input required="" class="input" type="email" name="email" id="email" placeholder="E-mail">
       <input required="" class="input" type="password" name="password" id="password" placeholder="Mot de passe">
       <span class="forgot-password"><a href="load.html">Mot de passe oublier ?</a></span>
@@ -267,7 +278,13 @@
         </div>
       </div>
       <span class="agreement"><a href="#">&copy; 2024</a></span>
-  </div></body>
+  </div>
+  <br>
+
+  <footer>
+    <p>&copy; 2024 </p>
+  </footer>
+</body>
   </html>
 
 
