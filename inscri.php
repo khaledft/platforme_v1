@@ -1,5 +1,5 @@
 <?php 
-include ("Connect.php");
+include ("connect.php");
 
 $nom = $_POST['nom'];
 $prenom = $_POST['prenom'];

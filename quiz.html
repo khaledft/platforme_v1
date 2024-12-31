@@ -274,39 +274,33 @@
 
     <!-- Section principale -->
     <div class="container">
+        <form method="POST" action="quiz.php">
         <!-- Formulaire pour ajouter des questions -->
         <label for="question">Question :</label>
-        <input type="text" id="question" placeholder="Entrez votre question ici">
+        <input type="text" name="question" id="question" placeholder="Entrez votre question ici">
 
         <label for="option1">Option 1 :</label>
-        <input type="text" id="option1" placeholder="Option 1">
+        <input type="text"  name="option1" id="option1" placeholder="Option 1">
 
         <label for="option2">Option 2 :</label>
-        <input type="text" id="option2" placeholder="Option 2">
+        <input type="text"  name="option2" id="option2" placeholder="Option 2">
 
         <label for="option3">Option 3 :</label>
-        <input type="text" id="option3" placeholder="Option 3">
+        <input type="text" name="option3" id="option3" placeholder="Option 3">
 
         <label for="correctOption">Numéro de l'option correcte (1, 2 ou 3) :</label>
-        <input type="number" id="correctOption" min="1" max="3" placeholder="Ex: 2">
-
-        <button onclick="addQuestion()">Ajouter la question</button>
-
-        <!-- Affichage des questions -->
-        <div class="question-preview">
-            <h3>Questions ajoutées :</h3>
-            <div id="quizPreview"></div>
-            <button onclick="submitQuiz()">Submit</button>
-            <div id="results" class="result"></div>
-        </div>
-    </div>
-
-    <footer>
+        <input type="number"  name="correctOption" id="correctOption" min="1" max="3" placeholder="Ex: 2">
+   
+   <button type="submit"> Enregistre</button>
+    </form>
+       
       
-        <p>&copy; 2024 </p>
-      </footer>
+    </div>
+    
 
     <script>
+        
+        /*
         let questions = [];
 
         function addQuestion() {
@@ -339,7 +333,7 @@
             document.getElementById("option3").value = "";
             document.getElementById("correctOption").value = "";
         }
-
+/*
         function displayQuestions() {
             const quizPreview = document.getElementById("quizPreview");
             quizPreview.innerHTML = "";
@@ -360,7 +354,7 @@
                 `;
             });
         }
-
+/*
         function submitQuiz() {
             let resultsHTML = "";
             questions.forEach((q, index) => {
@@ -379,7 +373,7 @@
             });
 
             document.getElementById("results").innerHTML = resultsHTML;
-        }
+        }*/
     </script>
   
 </body>
