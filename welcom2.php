@@ -1,18 +1,23 @@
 <?php
 session_start();
-include("connect.php"); // Inclure la connexion à la base de données
+include("connect.php"); // Inclure la connexion à la base de données via PDO
 
 // Vérifier si l'utilisateur est administrateur
 
 // Supprimer un quiz
 if (isset($_GET['delete_id'])) {
     $delete_id = $_GET['delete_id'];
-    $sql_delete = "DELETE FROM quiz WHERE id = ?";
-    $stmt_delete = $com->prepare($sql_delete);
-    $stmt_delete->bind_param("i", $delete_id);
-    $stmt_delete->execute();
-    header("Location: welcom2.php"); // Rediriger après suppression
-    exit();
+    try {
+        // Supprimer un quiz en utilisant PDO
+        $sql_delete = "DELETE FROM quiz WHERE id = :id";
+        $stmt_delete = $com->prepare($sql_delete);
+        $stmt_delete->bindParam(':id', $delete_id, PDO::PARAM_INT);
+        $stmt_delete->execute();
+        header("Location: welcom2.php"); // Rediriger après suppression
+        exit();
+    } catch (PDOException $e) {
+        echo "Erreur : " . $e->getMessage();
+    }
 }
 
 // Modifier un quiz
@@ -24,17 +29,34 @@ if (isset($_POST['update_quiz'])) {
     $option3 = $_POST['option3'];
     $cr = $_POST['cr'];
 
-    $sql_update = "UPDATE quiz SET question = ?, option1 =  ?, option2 = ?, option3 = ?, cr = ? WHERE id = ?";
-    $stmt_update = $com->prepare($sql_update);
-    $stmt_update->bind_param("ssssii", $question, $option1, $option2, $option3, $cr, $id);
-    $stmt_update->execute();
- header("Location: welcom2.php"); // Rediriger après modification
-    exit();
+    try {
+        // Mettre à jour un quiz en utilisant PDO
+        $sql_update = "UPDATE quiz SET question = :question, option1 = :option1, option2 = :option2, option3 = :option3, cr = :cr WHERE id = :id";
+        $stmt_update = $com->prepare($sql_update);
+        $stmt_update->bindParam(':question', $question, PDO::PARAM_STR);
+        $stmt_update->bindParam(':option1', $option1, PDO::PARAM_STR);
+        $stmt_update->bindParam(':option2', $option2, PDO::PARAM_STR);
+        $stmt_update->bindParam(':option3', $option3, PDO::PARAM_STR);
+        $stmt_update->bindParam(':cr', $cr, PDO::PARAM_INT);
+        $stmt_update->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt_update->execute();
+        header("Location: welcom2.php"); // Rediriger après modification
+        exit();
+    } catch (PDOException $e) {
+        echo "Erreur : " . $e->getMessage();
+    }
 }
 
 // Afficher tous les quiz
-$sql = "SELECT * FROM quiz";
-$res = mysqli_query($com, $sql);
+try {
+    // Sélectionner tous les quiz en utilisant PDO
+    $sql = "SELECT * FROM quiz";
+    $stmt = $com->prepare($sql);
+    $stmt->execute();
+    $quiz_list = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
+}
 ?>
 
 <!DOCTYPE html>
@@ -82,8 +104,7 @@ $res = mysqli_query($com, $sql);
             background-color: #f2f2f2;
         }
 
-              
-        button {
+               button {
             margin-top:10px;
            background-color:rgba(175, 171, 177, 0.69);
             width: 150px;
@@ -115,7 +136,6 @@ $res = mysqli_query($com, $sql);
             text-decoration: none;
         }
 
-
         .fr {
             display: none;
             position: fixed;
@@ -138,10 +158,6 @@ $res = mysqli_query($com, $sql);
             color:black;
         }
 
-       
-
-
-
     </style>
 <body>
 
@@ -160,7 +176,7 @@ $res = mysqli_query($com, $sql);
         </tr>
     </thead>
     <tbody>
-        <?php while ($row = mysqli_fetch_assoc($res)) { ?>
+        <?php foreach ($quiz_list as $row) { ?>
             <tr>
                 <td><?php echo $row['id']; ?></td>
                 <td><?php echo $row['question']; ?></td>
@@ -170,8 +186,8 @@ $res = mysqli_query($com, $sql);
                 <td><?php echo $row['cr']; ?></td>
                 <td>
                     <button onclick="document.getElementById('editForm<?php echo $row['id']; ?>').style.display='block'">Modifier</button>
-                  <button>  <a href="welcom2.php?delete_id=<?php echo $row['id']; ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce quiz ?');">Supprimer</a></button>
-               <button ><a href="quiz.html"> Ajouter</a></button>
+                    <button>  <a href="welcom2.php?delete_id=<?php echo $row['id']; ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce quiz ?');">Supprimer</a></button>
+                    <button ><a href="quiz.html"> Ajouter</a></button>
                 </td>
             </tr>
 

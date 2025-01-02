@@ -1,7 +1,19 @@
+
 <?php
-$s_name="127.0.0.1";
-$u_name="root";
+
+$host="localhost";
+$user="root";
 $password="";
-$db_name="platforme_khaled";
-$com=new mysqli($s_name,$u_name,$password,$db_name);
+$dbname="platforme_quiz";
+$dsn = "mysql:host=$host;dbname=$dbname;port=3307;charset=utf8";
+try{
+
+
+    $com=new PDO($dsn,$user,$password);
+    $com->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+
+}catch( PDOException $e){
+    echo 'Error : ' . $e->getMessage();
+    exit();
+}
 ?>

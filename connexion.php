@@ -1,47 +1,40 @@
 <?php
 include("connect.php");
 
+// Récupérer les données envoyées via POST
 $mdp = $_POST['password'];
 $email = $_POST['email'];
 
-$sql1 = "SELECT email, role FROM membre_site WHERE email = '$email'";
-$res1 = mysqli_query($com, $sql1);
+try {
+    // Préparer la requête pour vérifier si l'email existe dans la base de données
+    $sql1 = "SELECT email, role, mdp FROM membre_site WHERE email = :email";
+    $stmt1 = $com->prepare($sql1);
+    $stmt1->bindParam(':email', $email, PDO::PARAM_STR);
+    $stmt1->execute();
 
-$existe = false;
-$role = ''; // Variable pour stocker le rôle
-
-while ($row = mysqli_fetch_assoc($res1)) {
-    if ($email == $row['email']) {
-        $existe = true;
-        $role = $row['role']; // Récupérer le rôle de l'utilisateur
-    }
-}
-
-if ($existe == true) {
-    $test = false;
-    $sql2 = "SELECT mdp FROM membre_site WHERE email = '$email'";
-    $res2 = mysqli_query($com, $sql2);
-
-    while ($row = mysqli_fetch_assoc($res2)) {
+    // Vérifier si l'email existe
+    if ($row = $stmt1->fetch(PDO::FETCH_ASSOC)) {
+        // Vérifier si le mot de passe est correct
         if ($mdp == $row['mdp']) {
-            $test = true;
-        }
-    }
-
-    if ($test == true) {
-        // Vérifier le rôle et rediriger vers la bonne page
-        if ($role == 'admin') {
-            header("Location: welcom2.php"); // Remplacez 'nouvelle_page.php' par le nom de la page cible
-exit();
-            // Page spécifique pour les admins
-        } else if ($role == 'user') {
-            header("Location: welcom.html"); // Remplacez 'nouvelle_page.php' par le nom de la page cible
-exit();// Page spécifique pour les utilisateurs
+            // Vérifier le rôle et rediriger
+            if ($row['role'] == 'admin') {
+                header("Location: welcom2.php"); // Page spécifique pour les admins
+                exit();
+            } else if ($row['role'] == 'user') {
+                header("Location: welcom.html"); // Page spécifique pour les utilisateurs
+                exit();
+            }
+        } else {
+            // Mot de passe incorrect
+            include("erreur.html");
         }
     } else {
-        include("erreur.html"); // Mot de passe incorrect
+        // Email non trouvé
+        include("erreur.html");
     }
-} else {
-    include("erreur.html"); // Email non trouvé
+} catch (PDOException $e) {
+    // Si une erreur de connexion ou de requête se produit
+    echo "Erreur : " . $e->getMessage();
+    exit();
 }
 ?>

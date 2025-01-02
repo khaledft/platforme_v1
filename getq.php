@@ -2,17 +2,30 @@
 include("Connect.php"); // Assurez-vous que le fichier Connect.php contient la connexion à la base de données
 
 // Récupérer les questions de la base de données
-$sql = "SELECT id, question, option1, option2, option3, cr FROM quiz";
-$result = $com->query($sql);
+
+
 
 $questions = [];
-if ($result && $result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $questions[] = $row;
-    }
-} else {
-    $questions = [];
+
+    
+
+try {
+    // Préparation de la requête de selection
+    $sql = "SELECT id, question, option1, option2, option3, cr FROM quiz";
+    $stmt = $com->prepare($sql);
+    $stmt->execute();
+    
+    // Récupérer toutes les lignes du résultat
+    $questions = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    
+   
+    
+} catch (PDOException $e) {
+    echo 'Error : ' . $e->getMessage();
+    exit();
 }
+
 ?>
 
 <!DOCTYPE html>

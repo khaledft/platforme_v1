@@ -329,19 +329,11 @@
             return;
         }
       
-        // Password contains at least one uppercase letter
-        if (!/[A-Z]/.test(password)) {
-            message.textContent = "Le mot de passe doit contenir au moins une lettre majuscule.";
-            message.className = "error";
-            return;
-        }
+        
+        
       
-        // Password contains at least one number
-        if (!/[0-9]/.test(password)) {
-            message.textContent = "Le mot de passe doit contenir au moins un chiffre.";
-            message.className = "error";
-            return;
-        }
+       
+        
       
         // Check if the passwords match
         if (password !== confirmPassword) {
